@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&display=swap");
+
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+:root {
+  --primaryColor: #f77e21;
+  --primaryColorDark: #d61c4e;
+  --primaryColorLight: #fac213;
+  --secondaryColor: #fef9a7;
+  --mainWhite: #fff;
+  --mainBlack: #222;
+  --mainGrey: #7c7c7c;
+  --mainSpacing: 0.1rem;
+  --mainTransition: all 0.3s ease-in-out;
+  --mainRed: #db2777;
+  --bodyColor: #f6f6f6;
+}
+html {
+  font-size: 62.5%;
+  background: var(--bodyColor);
+}
+body {
+  font-family: "Dosis", sans-serif;
+  color: var(--mainBlack);
+  font-size: 1.4rem;
+  line-height: 1.7;
+}
+h1,
+h2,
+h3 {
+  font-weight: 700;
+}
+
