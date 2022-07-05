@@ -26,25 +26,25 @@ export const productsData = [
   {
     id: 5,
     title: "Black-office-Desk",
-    price: 25,
+    price: 13.2,
     imageUrl: "./images/black-office-Desk.jpg",
   },
   {
     id: 6,
     title: "Desk-Drawer",
-    price: 25,
+    price: 18.5,
     imageUrl: "./images/Desk-Drawer.jpg",
   },
   {
     id: 7,
     title: "Mini-White-Desk",
-    price: 25,
+    price: 10,
     imageUrl: "./images/mini-White-Desk.jpg",
   },
   {
     id: 8,
     title: "White-office-Desk",
-    price: 25,
+    price: 60,
     imageUrl: "./images/white-office-Desk.jpg",
   },
 ];
