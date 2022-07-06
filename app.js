@@ -90,7 +90,7 @@ class UI {
               <p>${cartItem.quantity}</p>
               <i class="fas fa-chevron-down" data-id=${cartItem.id}></i>
             </div>
-            <i class="fa-solid fa-trash"></i>`;
+            <i class="fa-solid fa-trash" data-id=${cartItem.id}></i>`;
     cartContent.appendChild(div);
   }
   setUpApp() {
@@ -100,17 +100,43 @@ class UI {
   }
   cartLogic() {
     clearCart.addEventListener("click", () => this.clearCart());
-    cartContent.addEventListener("click",(event)=>{
-      if(event.target.classList.contains("fa-chevron-up")){
-        const addQuantity=event.target;
-        const addedItem=cart.find((cItem)=>cItem.id==addQuantity.dataset.id);
+    cartContent.addEventListener("click", (event) => {
+      if (event.target.classList.contains("fa-chevron-up")) {
+        const addQuantity = event.target;
+        const addedItem = cart.find(
+          (cItem) => cItem.id == addQuantity.dataset.id
+        );
         addedItem.quantity++;
         this.setCartValue(cart);
         Storage.saveCart(cart);
-        addQuantity.nextElementSibling.innerText=addedItem.quantity;
+        addQuantity.nextElementSibling.innerText = addedItem.quantity;
         console.log(addQuantity.nextElementSibling.innerText);
+      } else if (event.target.classList.contains("fa-trash")) {
+        const removeItem = event.target;
+        console.log(removeItem);
+        const removedItem = cart.find(
+          (cItem) => cItem.id == removeItem.dataset.id
+        );
+        this.removeItem(removedItem.id);
+        Storage.saveCart(cart);
+        cartContent.removeChild(removeItem.parentElement);
+      } else if (event.target.classList.contains("fa-chevron-down")) {
+        const subQuantity = event.target;
+        const substracktedItem = cart.find(
+          (cItem) => cItem.id == subQuantity.dataset.id
+        );
+        if (substracktedItem.quantity === 1) {
+          this.removeItem(substracktedItem.id);
+          cartContent.removeChild(subQuantity.parentElement.parentElement);
+        }
+        substracktedItem.quantity--;
+
+        this.setCartValue(cart);
+        Storage.saveCart(cart);
+        subQuantity.previousElementSibling.innerText =
+          substracktedItem.quantity;
       }
-    })
+    });
   }
   clearCart() {
     cart.forEach((cItem) => this.removeItem(cItem.id));
@@ -127,7 +153,9 @@ class UI {
     this.getSignalButtons(id);
   }
   getSignalButtons(id) {
-    const button = buttonsDOM.find((btn) =>parseInt(btn.dataset.id) == parseInt(id));
+    const button = buttonsDOM.find(
+      (btn) => parseInt(btn.dataset.id) == parseInt(id)
+    );
     button.innerText = "add To Cart";
     button.disable = false;
   }
